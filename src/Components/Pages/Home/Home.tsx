@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import ChessTable from "../../Chess/ChessTable";
 
-type Props = {}
+type Props = {};
 
 const Home = (props: Props) => {
-  return (
-    <div>Home</div>
-  )
-}
+  console.log(ChessTable());
 
-export default Home
+  return <div>hh</div>;
+};
+
+export default Home;
