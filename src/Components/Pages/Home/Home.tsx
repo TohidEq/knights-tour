@@ -4,7 +4,12 @@ import ChessTable from "../../Chess/ChessTable";
 type Props = {};
 
 const Home = (props: Props) => {
-  console.log(ChessTable());
+  const { chessTable } = ChessTable();
+
+  const index = chessTable.findIndex((item) => item.x === 4 && item.y === 7);
+  //chessTable[4].check = 3;
+  chessTable[index].Check = 2;
+  console.log(chessTable[index]);
 
   return <div>hh</div>;
 };
