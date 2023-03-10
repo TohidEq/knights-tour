@@ -5,3 +5,6 @@
 
 @import "./base/_page.css";
 
+body {
+  @apply bg-custom-color-name text-[#fff] text-center;
+}
