@@ -1,0 +1,15 @@
+.test {
+  @apply w-fit;
+}
+.chess-table {
+  @apply grid grid-cols-8;
+}
+.chess-table button {
+  @apply w-10 h-10;
+}
+.chess-table button.white-h {
+  @apply bg-[#fff] text-[#000];
+}
+.chess-table button.black-h {
+  @apply bg-[#000] text-[#fff];
+}

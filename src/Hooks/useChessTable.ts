@@ -22,5 +22,5 @@ export default function useChessTable() {
     localStorage.setItem("mychesstable", JSON.stringify(data));
   }, [data]);
 
-  return { data };
+  return { data, setData };
 }

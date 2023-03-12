@@ -1,5 +1,6 @@
 import React from "react";
 import ChessTable from "../../Chess/ChessTable";
+import ChessTableVisual from "../../Chess/ChessTableVisual";
 
 type Props = {};
 
@@ -11,7 +12,12 @@ const Home = (props: Props) => {
   chessTable[index].Check = 2;
   console.log(chessTable[index]);
 
-  return <div>hh</div>;
+  return (
+    <div className="test">
+      
+      <ChessTableVisual />
+    </div>
+  );
 };
 
 export default Home;
