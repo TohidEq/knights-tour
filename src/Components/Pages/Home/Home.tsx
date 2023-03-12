@@ -16,6 +16,10 @@ const Home = (props: Props) => {
     <div className="test">
       
       <ChessTableVisual />
+      <button
+        onClick={() => {
+          
+      }}>test</button>
     </div>
   );
 };

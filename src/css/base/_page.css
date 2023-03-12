@@ -1,0 +1,10 @@
+body {
+  background: #540054;
+  background: -webkit-linear-gradient(to right, #540054, #bf4193);
+  background: linear-gradient(to right, #540054, #bf4193);
+}
+.App {
+  @apply text-center pt-1 
+    xss:pt-2 sm:pt-3
+    xss:text-2xl sm:text-3xl;
+}

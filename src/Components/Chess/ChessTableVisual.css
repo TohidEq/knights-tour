@@ -1,15 +1,18 @@
-.test {
-  @apply w-fit;
-}
 .chess-table {
-  @apply grid grid-cols-8;
+  @apply grid grid-cols-8 w-fit mx-auto;
 }
-.chess-table button {
-  @apply w-10 h-10;
-}
+
 .chess-table button.white-h {
-  @apply bg-[#fff] text-[#000];
+  @apply bg-white-h;
 }
 .chess-table button.black-h {
-  @apply bg-[#000] text-[#fff];
+  @apply bg-black-h;
+}
+
+.chess-table button {
+  @apply text-[#010001]
+    w-6 h-6
+    xss:w-8 xss:h-8
+    sm:w-12 sm:h-12
+    md:w-14 md:h-14;
 }

@@ -5,6 +5,3 @@
 
 @import "./base/_page.css";
 @import "../Components/Chess/ChessTableVisual.css";
-body {
-  @apply bg-custom-color-name text-[#fff];
-}

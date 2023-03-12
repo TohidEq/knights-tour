@@ -22,10 +22,12 @@ const ChessTableVisual = (props: Props) => {
     <div className="chess-table">
       {chessTableIds.map((id) => (
         <button
+          key={id}
           id={id}
-          className={ChessTableClassName[id] ? "white-h" : "black-h"}
+          className={ChessTableClassName[id] ? "black-h" : "white-h"}
+          // disabled={Math.random() >= .5}
         >
-          ♘
+          ♞
         </button>
       ))}
     </div>
