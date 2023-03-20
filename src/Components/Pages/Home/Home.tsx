@@ -11,15 +11,16 @@ const Home = (props: Props) => {
   //chessTable[4].check = 3;
   chessTable[index].Check = 2;
   console.log(chessTable[index]);
+  const clickHandler = (e: any) => {
+    console.log(e.currentTarget.id);
+  };
 
   return (
     <div className="test">
-      
-      <ChessTableVisual />
-      <button
-        onClick={() => {
-          
-      }}>test</button>
+      <ChessTableVisual clickHandler={clickHandler} />
+      <button onClick={() => {}}>test</button>
+      <hr />
+      <button className="btn-daa">daa</button>
     </div>
   );
 };

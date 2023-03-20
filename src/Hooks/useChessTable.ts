@@ -1,14 +1,16 @@
 import React from "react";
 import ChessTable from "../Components/Chess/ChessTable";
+import { IChessTable } from '../Interfaces/ChessTable.interface';
+
 
 type Props = {};
 
-interface IChessTable {
-  x: number;
-  y: number;
-  check: number;
-  value: number;
-}
+// interface IChessTable {
+//   x: number;
+//   y: number;
+//   check: number;
+//   value: number;
+// }
 
 const { chessTable: defaultChessTable } = ChessTable();
 

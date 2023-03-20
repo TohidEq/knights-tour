@@ -34,7 +34,13 @@ const ChessTable = () => {
 
   for (var x = 1; x <= 8; x++) {
     for (var y = 1; y <= 8; y++) {
-      chessTable.push({ x: x, y: y, value: getValue(x, y), Check: 0 });
+      chessTable.push({
+        id: `x${x}y${y}`, // ex: id=x3y5
+        x: x,
+        y: y,
+        value: getValue(x, y),
+        Check: 0,
+      });
     }
   }
 

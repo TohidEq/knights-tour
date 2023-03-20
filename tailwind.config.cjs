@@ -6,6 +6,8 @@ module.exports = {
     colors: {
       "black-h": "#b0c040",
       "white-h": "#eeefd3",
+      bg1: "#540054",
+      bg2: "#bf4193",
     },
     screens: {
       xss: "440px",

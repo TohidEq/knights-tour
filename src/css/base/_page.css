@@ -1,10 +1,19 @@
 body {
-  background: #540054;
-  background: -webkit-linear-gradient(to right, #540054, #bf4193);
-  background: linear-gradient(to right, #540054, #bf4193);
+  @apply bg-bg1
+    bg-gradient-to-r
+    from-bg1 to-bg2;
 }
 .App {
   @apply text-center pt-1 
     xss:pt-2 sm:pt-3
     xss:text-2xl sm:text-3xl;
+}
+
+.btn-daa {
+  @apply p-2 mt-2 rounded
+
+    bg-gradient-to-tl 
+    from-[#f00] to-[#0f0]
+    
+    hover:bg-gradient-to-br;
 }
