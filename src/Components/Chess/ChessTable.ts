@@ -5,7 +5,7 @@ type Props = {};
 
 const ChessTable = () => {
   // var chessTable = [
-  //   {x:1,y:1, value:2, Check: (0:false , 1:true , 2:current position), value:2~8 },
+  //   {x:1,y:1, value:2, Check: (0:false , 1:true , 2:current position, 3:pass), value:2~8 },
   //   {...}, ...
   // ];
 
@@ -17,17 +17,17 @@ const ChessTable = () => {
     if (x > 8 || x < 1 || y > 8 || y < 1) return -1; // this pos is not on chessBoard...
 
     // r:right,  l:left,  u:up,  d:down
-    if (x + 2 >= 1 && x + 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2r 1u ╛
-    if (x + 2 >= 1 && x + 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2r 1d ╕
+    if (x + 2 >= 1 && x + 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2u 1r ╛
+    if (x + 2 >= 1 && x + 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2u 1l ╕
 
-    if (x - 2 >= 1 && x - 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2l 1u ╘
-    if (x - 2 >= 1 && x - 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2l 1d ╒
+    if (x - 2 >= 1 && x - 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2d 1r ╘
+    if (x - 2 >= 1 && x - 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2d 1l ╒
 
-    if (y + 2 >= 1 && y + 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1l 2d ╜
-    if (y + 2 >= 1 && y + 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1r 2d ╙
+    if (y + 2 >= 1 && y + 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1d 2l ╜
+    if (y + 2 >= 1 && y + 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1t 2l ╙
 
-    if (y - 2 >= 1 && y - 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1l 2u ╖
-    if (y - 2 >= 1 && y - 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1r 2u ╓
+    if (y - 2 >= 1 && y - 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1d 2r ╖
+    if (y - 2 >= 1 && y - 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1t 2r ╓
 
     return value;
   }
@@ -39,12 +39,12 @@ const ChessTable = () => {
         x: x,
         y: y,
         value: getValue(x, y),
-        check: 0,
+        check: 1,
       });
     }
   }
 
-  return  chessTable ;
+  return chessTable;
 };
 
 export default ChessTable;

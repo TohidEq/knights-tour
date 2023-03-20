@@ -33,6 +33,7 @@ const ChessTableVisual = (props: Props) => {
               : element.check === 3
               ? "X"
               : ""}
+            {/* {element.value} */}
           </button>
         );
       })}
