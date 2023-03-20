@@ -5,19 +5,26 @@ import ChessTableVisual from "../../Chess/ChessTableVisual";
 type Props = {};
 
 const Home = (props: Props) => {
-  const { chessTable } = ChessTable();
+  const myChessTable = ChessTable();
+  const [chessTable, setChessTable] = React.useState(ChessTable());
 
-  const index = chessTable.findIndex((item) => item.x === 4 && item.y === 7);
-  //chessTable[4].check = 3;
-  chessTable[index].Check = 2;
-  console.log(chessTable[index]);
   const clickHandler = (e: any) => {
     console.log(e.currentTarget.id);
+    const index = myChessTable.findIndex(
+      (item) => item.id === e.currentTarget.id
+    );
+    console.log(myChessTable[index]);
+    //chessTable[4].check = 3;
+    myChessTable[index].check = 2;
+
+    // check useState changes on Object
+    setChessTable(myChessTable);
+    console.log(myChessTable);
   };
 
   return (
     <div className="test">
-      <ChessTableVisual clickHandler={clickHandler} />
+      <ChessTableVisual clickHandler={clickHandler} mydata={chessTable} />
       <button onClick={() => {}}>test</button>
       <hr />
       <button className="btn-daa">daa</button>

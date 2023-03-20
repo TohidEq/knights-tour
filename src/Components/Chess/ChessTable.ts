@@ -39,12 +39,12 @@ const ChessTable = () => {
         x: x,
         y: y,
         value: getValue(x, y),
-        Check: 0,
+        check: 0,
       });
     }
   }
 
-  return { chessTable };
+  return  chessTable ;
 };
 
 export default ChessTable;
