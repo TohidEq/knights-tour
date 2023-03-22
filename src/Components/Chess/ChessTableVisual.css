@@ -11,8 +11,8 @@
 
 .chess-table button {
   @apply text-[#010001]
-    w-6 h-6
-    xss:w-8 xss:h-8
+    w-8 h-8
+    xss:w-10 xss:h-10
     sm:w-12 sm:h-12
     md:w-14 md:h-14
     select-none;

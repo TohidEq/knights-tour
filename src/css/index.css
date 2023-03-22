@@ -586,8 +586,8 @@ body {
 }
 
 .chess-table button {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -597,8 +597,8 @@ body {
 
 @media (min-width: 440px) {
   .chess-table button {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
 
