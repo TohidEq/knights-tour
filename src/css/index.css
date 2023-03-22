@@ -518,6 +518,9 @@ video {
 }
 
 body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   --tw-bg-opacity: 1;
   background-color: rgb(84 0 84 / var(--tw-bg-opacity));
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
@@ -585,6 +588,9 @@ body {
 .chess-table button {
   height: 1.5rem;
   width: 1.5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   --tw-text-opacity: 1;
   color: rgb(1 0 1 / var(--tw-text-opacity));
 }

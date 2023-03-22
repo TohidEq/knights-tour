@@ -97,6 +97,7 @@ const Home = (props: Props) => {
         className="btn-daa"
         onClick={() => {
           localStorage.removeItem("chessData");
+          window.location.reload();
         }}
       >
         remove data
