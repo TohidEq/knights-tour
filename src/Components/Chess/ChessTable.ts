@@ -1,5 +1,6 @@
 import React from "react";
 import App from "../../App";
+import { IChessTable } from "../../Interfaces/ChessTable.interface";
 
 type Props = {};
 
@@ -9,7 +10,7 @@ const ChessTable = () => {
   //   {...}, ...
   // ];
 
-  var chessTable = [];
+  var chessTable: IChessTable[] = [];
 
   function getValue(x: number, y: number) {
     var value: number = 0;
@@ -39,7 +40,10 @@ const ChessTable = () => {
         x: x,
         y: y,
         value: getValue(x, y),
-        check: 1,
+        //check: x % 4 === 0 ? 3 : 1,
+        isPass: false,
+        currentPos: false,
+        possiblePos: true,
       });
     }
   }

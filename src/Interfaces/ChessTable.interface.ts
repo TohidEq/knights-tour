@@ -7,6 +7,10 @@ export interface IChessTable {
   id: String;
   x: number;
   y: number;
-  check: number;
+  // check: number;
+
+  currentPos: boolean;
+  possiblePos: boolean;
+  isPass: boolean;
   value: number;
 }

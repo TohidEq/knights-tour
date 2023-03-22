@@ -1,48 +1,73 @@
 import React from "react";
 import ChessTable from "../../Chess/ChessTable";
 import ChessTableVisual from "../../Chess/ChessTableVisual";
+import { IChessTable } from "../../../Interfaces/ChessTable.interface";
 
 type Props = {};
 
 const Home = (props: Props) => {
-  const myChessTable = ChessTable();
-  const [chessTable, setChessTable] = React.useState(ChessTable());
+  const myChessTable: IChessTable[] = JSON.parse(
+    localStorage.getItem("chessData") || JSON.stringify(ChessTable())
+  );
+  const [chessTable, setChessTableState] = React.useState(ChessTable());
 
+  const setChessTable = (props: IChessTable[]) => {
+    setChessTableState(props);
+
+    localStorage.setItem("chessData", JSON.stringify(props));
+  };
+
+  //   {x:1,y:1, value:2, Check: (0:false , 1:true , 2:current position, 3:pass), value:2~8 },
+  console.log(222);
   const clickHandler = (e: any) => {
-    console.log(e.currentTarget.id);
-    const index = myChessTable.findIndex(
-      (item) => item.id === e.currentTarget.id
-    );
-    console.log(myChessTable[index]);
-    //chessTable[4].check = 3;
-    myChessTable[index].check = 2;
+    e.preventDefault();
 
-    // check useState changes on Object
+    const id = e.currentTarget.id;
+    var clickedIndex = myChessTable.findIndex((item) => item.id === id);
+
+    const x = myChessTable[clickedIndex].x;
+    const y = myChessTable[clickedIndex].y;
+    console.log("going to disable forever this move:", id);
+    removeAllPossibleMoves();
+    myChessTable[clickedIndex].currentPos = true;
+
+    myChessTable[clickedIndex].isPass = true;
+
+    possibleMoves({ x: x, y: y });
     setChessTable(myChessTable);
-    console.log(myChessTable);
 
-    firstMove();
+    console.log("current:", clickedIndex);
   };
 
-  // Get current pos:
-  const getCurrnetPos = (): { x: number; y: number; id: String } => {
-    const index = myChessTable.find((item) => item.check === 2);
-    return { x: index!.x, y: index!.y, id: index!.id };
-  };
-
-  // First Move:
-  const firstMove = () => {
-    possibleMoves();
-  };
-
-  const possibleMoves = () => {
-    const { x, y, id } = getCurrnetPos();
-
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+  // Remove all possible moves //
+  const removeAllPossibleMoves = () => {
     myChessTable
-      .filter((item) => item.check === 1)
+      // get all possible poses
+      .filter((item) => item.possiblePos)
+      // map them to access to indexs
       .map((item) => {
-        myChessTable[myChessTable.findIndex((i) => i.id === item.id)].check = 0;
+        // get single item index in mtChessTable
+        const index = myChessTable.findIndex((i) => i.id === item.id);
+        // disable singe item
+        myChessTable[index].possiblePos = false;
       });
+    myChessTable
+      // get all possible poses
+      .filter((item) => item.currentPos)
+      // map them to access to indexs
+      .map((item) => {
+        // get single item index in mtChessTable
+        const index = myChessTable.findIndex((i) => i.id === item.id);
+        // disable singe item
+        myChessTable[index].currentPos = false;
+      });
+  };
+
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+  // get all posible moves and make them active possiblePos(false)->(true) //
+  const possibleMoves = (props: { x: number; y: number }) => {
+    const { x, y } = props;
 
     const xiy = [
       { x: 1, y: 2 },
@@ -56,56 +81,26 @@ const Home = (props: Props) => {
     ];
     xiy.forEach((itemXY) => {
       const index = myChessTable.findIndex(
-        (item) => item.x === x + itemXY.x && item.y === y + itemXY.y
+        (item) =>
+          item.x === x + itemXY.x && item.y === y + itemXY.y && !item.isPass
       );
-      console.log(
-        "x:",
-        x,
-        " and y:",
-        y,
-        "  --  x+ix ",
-        x + itemXY.x,
-        " and y+iy:",
-        y + itemXY.y,
-        "  -- idnex: ",
-        index
-      );
-      if (index >= 0) myChessTable[index].check = 1;
+
+      if (index >= 0) myChessTable[index].possiblePos = true;
     });
-
-    setChessTable(myChessTable);
-
-    //////////////////////////////////////////////
-    function getValue(x: number, y: number) {
-      /////////
-      var value: number = 0;
-
-      if (x > 8 || x < 1 || y > 8 || y < 1) return -1; // this pos is not on chessBoard...
-
-      // r:right,  l:left,  u:up,  d:down
-      if (x + 2 >= 1 && x + 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2u 1r ╛
-      if (x + 2 >= 1 && x + 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2u 1l ╕
-
-      if (x - 2 >= 1 && x - 2 <= 8 && y - 1 >= 1 && y - 1 <= 8) value++; // 2d 1r ╘
-      if (x - 2 >= 1 && x - 2 <= 8 && y + 1 >= 1 && y + 1 <= 8) value++; // 2d 1l ╒
-
-      if (y + 2 >= 1 && y + 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1d 2l ╜
-      if (y + 2 >= 1 && y + 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1t 2l ╙
-
-      if (y - 2 >= 1 && y - 2 <= 8 && x - 1 >= 1 && x - 1 <= 8) value++; // 1d 2r ╖
-      if (y - 2 >= 1 && y - 2 <= 8 && x + 1 >= 1 && x + 1 <= 8) value++; // 1t 2r ╓
-
-      return value;
-    } /////////
-    //////////////////////////////////////////////////
   };
 
+  ///////////////////////
   return (
     <div className="test">
       <ChessTableVisual clickHandler={clickHandler} mydata={chessTable} />
-      <button onClick={() => {}}>test</button>
-      <hr />
-      <button className="btn-daa">daa</button>
+      <button
+        className="btn-daa"
+        onClick={() => {
+          localStorage.removeItem("chessData");
+        }}
+      >
+        remove data
+      </button>
     </div>
   );
 };

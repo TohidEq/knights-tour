@@ -1,5 +1,3 @@
-import React from "react";
-import ChessTable from "./ChessTable";
 import { IChessTable } from "../../Interfaces/ChessTable.interface";
 
 type Props = { clickHandler: any; mydata: IChessTable[] };
@@ -23,15 +21,15 @@ const ChessTableVisual = (props: Props) => {
             className={checkBW(element.x, element.y) ? "black-h" : "white-h"}
             onClick={clickHandler}
             // hanooz (ALL CH = 1 in FirstMove) ro nazadim
-            disabled={element.check === 0}
+            disabled={!element.possiblePos}
             // disabled={Math.random() >= .5}
           >
-            {element.check === 1
-              ? "*"
-              : element.check === 2
+            {element.currentPos
               ? "♞"
-              : element.check === 3
-              ? "X"
+              : element.isPass
+              ? "✗"
+              : element.possiblePos
+              ? "●"
               : ""}
             {/* {element.value} */}
           </button>
