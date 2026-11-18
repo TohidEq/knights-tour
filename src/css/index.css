@@ -513,11 +513,25 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.table {
+  display: table;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 body {
+  min-height: 100vh;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -551,67 +565,218 @@ body {
   }
 }
 
-.btn-daa {
-  margin-top: 0.5rem;
-  border-radius: 0.25rem;
-  background-image: linear-gradient(to top left, var(--tw-gradient-stops));
-  --tw-gradient-from: #f00;
-  --tw-gradient-to: rgb(255 0 0 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-  --tw-gradient-to: #0f0;
-  padding: 0.5rem;
-}
-
-.btn-daa:hover {
-  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
-}
-
 .chess-table {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  --tw-translate-x: -50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.chess-board {
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  width: -moz-fit-content;
-  width: fit-content;
+  aspect-ratio: 1 / 1;
+  width: 85vmin;
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
-.chess-table button.white-h {
+.chess-board button.white-h {
   --tw-bg-opacity: 1;
-  background-color: rgb(238 239 211 / var(--tw-bg-opacity));
+  background-color: rgb(173 114 195 / var(--tw-bg-opacity));
 }
 
-.chess-table button.black-h {
+.chess-board button.black-h {
   --tw-bg-opacity: 1;
-  background-color: rgb(176 192 64 / var(--tw-bg-opacity));
+  background-color: rgb(68 16 97 / var(--tw-bg-opacity));
 }
 
-.chess-table button {
-  height: 2rem;
-  width: 2rem;
+.chess-board button {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: calc(100% - 2px);
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  border-radius: 0.375rem;
   --tw-text-opacity: 1;
   color: rgb(1 0 1 / var(--tw-text-opacity));
-}
-
-@media (min-width: 440px) {
-  .chess-table button {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-}
-
-@media (min-width: 640px) {
-  .chess-table button {
-    height: 3rem;
-    width: 3rem;
-  }
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 @media (min-width: 768px) {
-  .chess-table button {
-    height: 3.5rem;
-    width: 3.5rem;
+  .chess-board button {
+    width: calc(100% - 4px);
   }
+}
+
+.chess-board button.possible {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  box-shadow:
+    0 0 8px #00000055,
+    inset 5px 5px 5px #E7C440,
+    inset -5px -5px 5px #E7C440;
+}
+
+.chess-board button.is-passed {
+  --tw-scale-x: .75;
+  --tw-scale-y: .75;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  opacity: 0.4;
+  box-shadow:
+      inset 4px 4px 8px rgba(0, 0, 0, 0.6),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.chess-board button.is-passed.black-h {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 51 104 / var(--tw-bg-opacity));
+}
+
+.chess-board button.is-passed.white-h {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 51 104 / var(--tw-bg-opacity));
+}
+
+.chess-board button.current-pos {
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  background-color: rgb(34 197 94 / 0.5);
+  box-shadow:
+      0 0 8px #00000055,
+      inset 5px 5px 5px #22C55E,
+      inset -5px -5px 5px #22C55E;
+}
+
+.chess-board button.YOU_LOST {
+  background-color: rgb(221 49 49 / 0.5);
+  box-shadow:
+        0 0 8px #00000055,
+        inset 5px 5px 5px #dd3131,
+        inset -5px -5px 5px #dd3131;
+}
+
+.chess-board button.YOU_WON {
+  z-index: 50;
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.chess-board button.YOU_WON {
+  animation: bounce 1s infinite;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(231 196 64 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  box-shadow: 0 0 10px #E7C440,
+  0 0 25px #f7d450;
+}
+
+.YOU_WON .chess-board button:not(.YOU_WON) {
+  --tw-scale-x: .5;
+  --tw-scale-y: .5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  opacity: 0.2;
+}
+
+.chess-board button.YOU_LOST img {
+  --tw-scale-y: -1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chess-board button.YOU_WON img {
+  animation: spin 1s linear infinite;
+}
+
+.chess-board button img {
+  aspect-ratio: 1 / 1;
+  width: calc(100% - 8px);
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1000ms;
+}
+
+/*--------------*/
+
+.chess-header {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 83vmin;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.btn-restart {
+  position: absolute;
+  right: 0px;
+  height: calc(100% - 16px);
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 49 49 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.btn-restart:hover {
+  --tw-rotate: 300deg;
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  opacity: 0.6;
+}
+
+.btn-restart img {
+  aspect-ratio: 1 / 1;
+  height: 100%;
+}
+
+.btn-restart.YOU_LOST {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
+.chess-table h1 {
+  --tw-text-opacity: 1;
+  color: rgb(225 225 225 / var(--tw-text-opacity));
 }

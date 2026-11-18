@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 3000",
     "build-css": "tailwindcss --postcss -i ./src/css/tailwind.css -o ./src/css/index.css --watch"
+  },
+  "engines": {
+    "node": "26.x"
   },
   "dependencies": {
     "autoprefixer": "^10.4.14",

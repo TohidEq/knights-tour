@@ -1,19 +1,149 @@
 .chess-table {
-  @apply grid grid-cols-8 w-fit mx-auto;
+  @apply w-full
+  absolute
+  top-1/2
+  left-1/2
+  -translate-x-1/2
+  -translate-y-1/2
+  ;
+}
+.chess-board{
+  @apply grid grid-cols-8  mx-auto
+    w-[85vmin] aspect-square;
 }
 
-.chess-table button.white-h {
+.chess-board button.white-h {
   @apply bg-white-h;
 }
-.chess-table button.black-h {
+.chess-board button.black-h {
   @apply bg-black-h;
 }
 
-.chess-table button {
+.chess-board button {
   @apply text-[#010001]
-    w-8 h-8
-    xss:w-10 xss:h-10
-    sm:w-12 sm:h-12
-    md:w-14 md:h-14
+    w-[calc(100%-2px)]
+    md:w-[calc(100%-4px)]
+    aspect-square relative
+    scale-95
+    rounded-md
+    transition-all
+    duration-300
     select-none;
+}
+
+.chess-board button.possible {
+  @apply scale-100;
+  box-shadow:
+    0 0 8px #00000055,
+    inset 5px 5px 5px #E7C440,
+    inset -5px -5px 5px #E7C440;
+}
+
+.chess-board button.is-passed{
+  @apply opacity-40 scale-75;
+  box-shadow:
+      inset 4px 4px 8px rgba(0, 0, 0, 0.6),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.25);
+}
+.chess-board button.is-passed.black-h{
+  @apply bg-black-h-pass;
+}
+.chess-board button.is-passed.white-h{
+  @apply bg-white-h-pass;
+}
+
+.chess-board button.current-pos{
+  @apply bg-current-pos/50 scale-90;
+  box-shadow:
+      0 0 8px #00000055,
+      inset 5px 5px 5px #22C55E,
+      inset -5px -5px 5px #22C55E;
+}
+
+.chess-board button.YOU_LOST{
+  @apply bg-redc/50;
+  box-shadow:
+        0 0 8px #00000055,
+        inset 5px 5px 5px #dd3131,
+        inset -5px -5px 5px #dd3131;
+}
+
+.chess-board button.YOU_WON{
+  @apply bg-wonc scale-150 z-50 rounded-full p-2 animate-bounce
+  ;
+  box-shadow: 0 0 10px #E7C440,
+  0 0 25px #f7d450;
+}
+
+.YOU_WON .chess-board button:not(.YOU_WON){
+  @apply opacity-20 scale-50 ;
+}
+
+.chess-board button.YOU_LOST img{
+  @apply -scale-y-100;
+}
+
+.chess-board button.YOU_WON img{
+  @apply animate-spin;
+}
+
+.chess-board button img{
+  @apply w-[calc(100%-8px)] aspect-square transition-all duration-1000
+  px-[4px]
+  py-[4px]
+  ;
+}
+
+
+
+
+
+
+
+
+/*--------------*/
+
+.chess-header{
+  @apply relative
+  w-[83vmin]
+  mx-auto
+  flex flex-nowrap
+  justify-between
+  items-center
+  py-4
+  ;
+}
+
+.btn-restart {
+  @apply p-2
+  absolute
+  right-0
+  h-[calc(100%-16px)]
+  transition-all
+  duration-300
+  bg-redc
+  hover:opacity-60
+  hover:scale-110
+  hover:rotate-[300deg]
+
+
+  rounded-full
+
+  ;
+}
+
+.btn-restart img{
+  @apply
+  h-full
+  aspect-square;
+
+}
+
+.btn-restart.YOU_LOST{
+  @apply bg-current-pos;
+}
+
+
+.chess-table h1{
+  @apply text-[#e1e1e1];
 }

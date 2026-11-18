@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ChessTable from "../../Chess/ChessTable";
 import ChessTableVisual from "../../Chess/ChessTableVisual";
 import { IChessTable } from "../../../Interfaces/ChessTable.interface";
@@ -6,10 +6,24 @@ import { IChessTable } from "../../../Interfaces/ChessTable.interface";
 type Props = {};
 
 const Home = (props: Props) => {
+
   const myChessTable: IChessTable[] = JSON.parse(
     localStorage.getItem("chessData") || JSON.stringify(ChessTable())
   );
-  const [chessTable, setChessTableState] = React.useState(ChessTable());
+  const [chessTable, setChessTableState] = React.useState(myChessTable);
+  const [yesWeHaveAPossibleMove, setYesWeHaveAPossibleMove] = React.useState(false)
+  const [hasWon, setHasWon] = React.useState(false);
+
+  const checkWin = (table: IChessTable[]) => {
+    const allPassed = table.every((item) => item.isPass);
+    setHasWon(allPassed);
+    return allPassed;
+  };
+
+  React.useEffect(() => {
+    console.log("yes? possible move?? ", yesWeHaveAPossibleMove);
+  }, [yesWeHaveAPossibleMove]);
+
 
   const setChessTable = (props: IChessTable[]) => {
     setChessTableState(props);
@@ -18,7 +32,6 @@ const Home = (props: Props) => {
   };
 
   //   {x:1,y:1, value:2, Check: (0:false , 1:true , 2:current position, 3:pass), value:2~8 },
-  console.log(222);
   const clickHandler = (e: any) => {
     e.preventDefault();
 
@@ -37,6 +50,7 @@ const Home = (props: Props) => {
     setChessTable(myChessTable);
 
     console.log("current:", clickedIndex);
+      setHasWon(checkWin(myChessTable));
   };
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -65,10 +79,10 @@ const Home = (props: Props) => {
   };
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
-  // get all posible moves and make them active possiblePos(false)->(true) //
+  // get all posible moves and make them active: possiblePos(false)->(true) //
   const possibleMoves = (props: { x: number; y: number }) => {
     const { x, y } = props;
-
+    setYesWeHaveAPossibleMove(false);
     const xiy = [
       { x: 1, y: 2 },
       { x: 2, y: 1 },
@@ -79,29 +93,24 @@ const Home = (props: Props) => {
       { x: -1, y: -2 },
       { x: -2, y: -1 },
     ];
+
     xiy.forEach((itemXY) => {
       const index = myChessTable.findIndex(
         (item) =>
           item.x === x + itemXY.x && item.y === y + itemXY.y && !item.isPass
       );
 
-      if (index >= 0) myChessTable[index].possiblePos = true;
+      if (index >= 0) {
+        myChessTable[index].possiblePos = true
+        setYesWeHaveAPossibleMove(true);
+      };
     });
   };
 
   ///////////////////////
   return (
-    <div className="test">
-      <ChessTableVisual clickHandler={clickHandler} mydata={chessTable} />
-      <button
-        className="btn-daa"
-        onClick={() => {
-          localStorage.removeItem("chessData");
-          window.location.reload();
-        }}
-      >
-        remove data
-      </button>
+    <div className="main">
+      <ChessTableVisual clickHandler={clickHandler} mydata={chessTable} yesWeHaveAPossibleMove={yesWeHaveAPossibleMove} hasWon={hasWon} />
     </div>
   );
 };

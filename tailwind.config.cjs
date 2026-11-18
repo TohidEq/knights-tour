@@ -4,8 +4,13 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      "black-h": "#b0c040",
-      "white-h": "#eeefd3",
+      "black-h": "#441061",
+      "black-h-pass": "#553368",
+      "white-h": "#AD72C3",
+      "white-h-pass": "#553368",
+      "current-pos":"#22C55E",
+      "redc":"#dd3131",
+      "wonc":"#E7C440",
       bg1: "#540054",
       bg2: "#bf4193",
     },
